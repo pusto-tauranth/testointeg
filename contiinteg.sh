@@ -11,8 +11,8 @@ if [ -d "$cur_dir/subtree0/" ];then
   echo "subtree already exists"
 else
   echo "exists nicht"
-  git remote add subrepo0 https://github.com/pusto-tauranth/test_1
-  git subtree add -P subtree0 subrepo0 master --squash
+  #git remote add subrepo0 https://github.com/pusto-tauranth/test_1
+  #git subtree add -P subtree0 subrepo0 master --squash
 fi
 
 git fetch subrepo0 master
