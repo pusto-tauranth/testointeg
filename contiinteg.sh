@@ -17,5 +17,5 @@ fi
 git fetch subrepo0 master
 git subtree pull -P subtree0 subrepo0 master --squash
 git add -A
-git commit -a -m "$1"
+git commit -am "$1"
 git push origin master
