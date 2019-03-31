@@ -19,6 +19,9 @@ fi
 
 git fetch subrepo0 master
 git subtree pull -P subtree0 subrepo0 master --squash
+
+git reset --soft HEAD~1
+
 git add -A
 git commit -am "$1"
 git push origin master
