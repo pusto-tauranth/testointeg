@@ -3,16 +3,16 @@
 ## $1 should be your comment
 commit_msg=$1
 
-## Following 2 lines are to Avoid Subtree Pull Error: "Working Tree Has Modifications. Cannot Add."
+## Following 2 lines are to avoid subtree pull Error: "Working tree has modifications. Cannot add."
 git add -A
 git commit -a -m "toAvoidSubtreePullError:WorkingTreeHasModifi" --allow-empty
 
 cur_dir=$(pwd)
 
 if [ -d "$cur_dir/subtree0/" ];then
-  echo "subtree already exists"
+  echo "Subtree already exists."
 else
-  echo "exists nicht"
+  echo "Subtree does not exist so add it now."
   git remote add subrepo0 https://github.com/pusto-tauranth/test_1
   git subtree add -P subtree0 subrepo0 master --squash
 fi
@@ -33,7 +33,7 @@ git reset --soft HEAD~2
 # else
 #   echo "succeeded"
 git add -A
-git commit -am "$1"
+git commit -am "$commit_msg"
 git push origin master
 # fi
 
