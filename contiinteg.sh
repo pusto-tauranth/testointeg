@@ -5,7 +5,7 @@ commit_msg=$1
 
 
 git add -A
-git commit -a -m $1
+git commit -a -m "toAvoidSubtreePullError:WorkingTreeHasModifi"
 
 cur_dir=$(pwd)
 
