@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# $1 should be your comment
 commit_msg=$1
 cur_dir=$(pwd)
 
@@ -19,3 +20,4 @@ git subtree pull -P subtree0 subrepo0 master --squash
 git add -A
 git commit -am "$1"
 git push origin master
+
