@@ -2,10 +2,12 @@
 
 # $1 should be your comment
 commit_msg=$1
-cur_dir=$(pwd)
 
-#git add -A
-#git commit -a -m $1
+
+git add -A
+git commit -a -m $1
+
+cur_dir=$(pwd)
 
 if [ -d "$cur_dir/subtree0/" ];then
   echo "subtree already exists"
