@@ -1,11 +1,9 @@
 #!/bin/bash
 
-#sub="subtree0 subrepo0 master https://github.com/pusto-tauranth/test_1""subtree1 subrepo1 master https://github.com/pusto-tauranth/pusto-mathe-kit"
 sub1=(
 "subtree0" "subrepo0" "master" "https://github.com/pusto-tauranth/test_1"
 "subtree1" "subrepo1" "master" "https://github.com/pusto-tauranth/pusto-mathe-kit"
 )
-((count=${#sub1[@]}/4+1))
 
 ## $1 should be your comment
 commit_msg=$1
@@ -13,6 +11,7 @@ commit_msg=$1
 cur_dir=$(pwd)
 
 for((i=0;i<${#sub1[@]}/4;i++));do
+
 if [ -d "$cur_dir/${sub1[((i*4+0))]}/" ];then
   echo "Subtree ${sub1[((i*4+0))]} already exists."
 else
@@ -33,6 +32,7 @@ git commit -a -m "autoCommitToAvoidSubtreePullError:WorkingTreeHasModifi" #--all
 git fetch ${sub1[((i*4+1))]} ${sub1[((i*4+2))]}
 git subtree pull -P ${sub1[((i*4+0))]} ${sub1[((i*4+1))]} ${sub1[((i*4+2))]} --squash -m "subtree_pull_${sub1[((i*4+0))]}"
 fi
+
 done
 
 #if [ -d "$cur_dir/subtree0/" ];then
