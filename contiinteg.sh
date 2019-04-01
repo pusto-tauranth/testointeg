@@ -24,9 +24,9 @@ for((i=0;i<${#subrepos[@]}/4;i++));do
   git fetch ${subrepos[((i*4+1))]} ${subrepos[((i*4+2))]}
   git subtree pull -P ${subrepos[((i*4+0))]} ${subrepos[((i*4+1))]} ${subrepos[((i*4+2))]} --squash -m "subtree_pull_${subrepos[((i*4+0))]}"
   subt_pull_exit=$?
-  echo "la exit status'est $subt_pull_exit"
+  echo "ContinuousIntegration Info: exit status of subtree_pull is $subt_pull_exit"
   if [ $subt_pull_exit -ne 0 ];then
-    ## Following 2 lines are to avoid subtree pull Error: "Working tree has modifications. Cannot add."
+    ## Then `add` and `commit` modifs in current wirking tree to avoid subtree pull Error: "Working tree has modifications. Cannot add."
     git add -A
     git commit -a -m "autoCommitToAvoidSubtreePullError:WorkingTreeHasModifi" #--allow-empty
 
@@ -43,10 +43,11 @@ done
 # make
 # if [ $? -ne 0 ]; then
 #   echo "failed"
+#   exit (1)
 # else
 #   echo "succeeded"
-git add -A
-git commit -am "$commit_msg"
-git push origin master
+  git add -A
+  git commit -am "$commit_msg"
+  git push origin master
 # fi
 
