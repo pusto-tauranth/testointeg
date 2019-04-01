@@ -1,12 +1,12 @@
 #!/bin/bash
 
-## TODO: add "subtree_name" "subrepo_name" "subrepo_branch_name" "subrepo_link" to this array
+#TODO: add "subtree_name" "subrepo_name" "subrepo_branch_name" "subrepo_link" to this array. And the repo/branch to push into is 
 subrepos=(
 "subtree0" "subrepo0" "master" "https://github.com/pusto-tauranth/test_1"
 "subtree1" "subrepo1" "master" "https://github.com/pusto-tauranth/pusto-mathe-kit"
 )
 
-## $1 should be your comment
+#$1 should be your comment
 commit_msg=$1
 
 cur_dir=$(pwd)
@@ -23,10 +23,11 @@ for((i=0;i<${#subrepos[@]}/4;i++));do
 
   git fetch ${subrepos[((i*4+1))]} ${subrepos[((i*4+2))]}
   git subtree pull -P ${subrepos[((i*4+0))]} ${subrepos[((i*4+1))]} ${subrepos[((i*4+2))]} --squash -m "subtree_pull_${subrepos[((i*4+0))]}"
+
   subt_pull_exit=$?
   echo "ContinuousIntegration Info: exit status of subtree_pull is $subt_pull_exit"
   if [ $subt_pull_exit -ne 0 ];then
-    ## Then `add` and `commit` modifs in current wirking tree to avoid subtree pull Error: "Working tree has modifications. Cannot add."
+    #Then `add` and `commit` the modifs in current working tree to avoid subtree pull Error: "Working tree has modifications. Cannot add."
     git add -A
     git commit -a -m "autoCommitToAvoidSubtreePullError:WorkingTreeHasModifi" #--allow-empty
 
@@ -37,8 +38,8 @@ for((i=0;i<${#subrepos[@]}/4;i++));do
 done
 
 
-## According to https://www.gnu.org/software/make/manual/html_node/Running.html#Running , the exit status is not 0 when make is not fully successful, hence the failure check is as below who will push only when make succeeded. 
-## Uncomment the following 10 lines (from `cmake` to `fi` to actually activate failure checker.
+#According to https://www.gnu.org/software/make/manual/html_node/Running.html#Running , the exit status is not 0 when make is not fully successful, hence the failure check is as below who will push only when make succeeded. 
+#TODO: Uncomment the following lines (from `cmake` to `fi`) to actually activate failure checker. The `git push ...` should also be modified.
 # cmake .
 # make
 # if [ $? -ne 0 ]; then
