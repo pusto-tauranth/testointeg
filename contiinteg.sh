@@ -11,9 +11,9 @@ commit_msg=$1
 
 cur_dir=$(pwd)
 
-for((i=0;i<${#subrepos[@]}/4;i++));do
+for ((i=0;i<${#subrepos[@]}/4;i++)); do
 
-  if [ -d "$cur_dir/${subrepos[((i*4+0))]}/" ];then
+  if [ -d "$cur_dir/${subrepos[((i*4+0))]}/" ]; then
     echo "ContinuousIntegration Info: Subtree ${subrepos[((i*4+0))]} already exists."
   else
     echo "ContinuousIntegration Info: Subtree ${subrepos[((i*4+0))]} does not exist so add it now."
@@ -26,7 +26,7 @@ for((i=0;i<${#subrepos[@]}/4;i++));do
 
   subt_pull_exit=$?
   echo "ContinuousIntegration Info: exit status of subtree_pull is $subt_pull_exit"
-  if [ $subt_pull_exit -ne 0 ];then
+  if [ $subt_pull_exit -ne 0 ]; then
     #Then `add` and `commit` the modifs in current working tree to avoid subtree pull Error: "Working tree has modifications. Cannot add."
     git add -A
     git commit -a -m "(CI auto commit) $commit_mag" #--allow-empty
