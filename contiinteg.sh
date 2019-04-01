@@ -21,15 +21,18 @@ else
   git subtree add -P ${sub1[((i*4+0))]} ${sub1[((i*4+1))]} ${sub1[((i*4+2))]} --squash
 fi
 
-## Following 2 lines are to avoid subtree pull Error: "Working tree has modifications. Cannot add."
-git add -A
-git commit -a -m "toAvoidSubtreePullError:WorkingTreeHasModifi" --allow-empty
-git reset --soft HEAD~1
-
-
 git fetch ${sub1[((i*4+1))]} ${sub1[((i*4+2))]}
 git subtree pull -P ${sub1[((i*4+0))]} ${sub1[((i*4+1))]} ${sub1[((i*4+2))]} --squash -m "subtree_pull_${sub1[((i*4+0))]}"
-echo "la exit status'est $?"
+subt_pull_exit=$?
+echo "la exit status'est $subt_pull_exit"
+if [$subt_pull_exit -ne 0];then
+## Following 2 lines are to avoid subtree pull Error: "Working tree has modifications. Cannot add."
+git add -A
+git commit -a -m "autoCommitToAvoidSubtreePullError:WorkingTreeHasModifi" #--allow-empty
+#git reset --soft HEAD~1
+git fetch ${sub1[((i*4+1))]} ${sub1[((i*4+2))]}
+git subtree pull -P ${sub1[((i*4+0))]} ${sub1[((i*4+1))]} ${sub1[((i*4+2))]} --squash -m "subtree_pull_${sub1[((i*4+0))]}"
+fi
 done
 
 #if [ -d "$cur_dir/subtree0/" ];then
