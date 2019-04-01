@@ -27,6 +27,7 @@ fi
 
 git fetch ${sub1[((i*4+1))]} ${sub1[((i*4+2))]}
 git subtree pull -P ${sub1[((i*4+0))]} ${sub1[((i*4+1))]} ${sub1[((i*4+2))]} --squash
+echo "la exit status'est $?"
 done
 #if [ -d "$cur_dir/subtree0/" ];then
 #  echo "Subtree already exists."
