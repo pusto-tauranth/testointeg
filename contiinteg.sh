@@ -29,7 +29,7 @@ for((i=0;i<${#subrepos[@]}/4;i++));do
   if [ $subt_pull_exit -ne 0 ];then
     #Then `add` and `commit` the modifs in current working tree to avoid subtree pull Error: "Working tree has modifications. Cannot add."
     git add -A
-    git commit -a -m "autoCommitToAvoidSubtreePullError:WorkingTreeHasModifi" #--allow-empty
+    git commit -a -m "(CI auto commit) $commit_mag" #--allow-empty
 
     git fetch ${subrepos[((i*4+1))]} ${subrepos[((i*4+2))]}
     git subtree pull -P ${subrepos[((i*4+0))]} ${subrepos[((i*4+1))]} ${subrepos[((i*4+2))]} --squash -m "subtree_pull_${subrepos[((i*4+0))]}"
